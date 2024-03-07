@@ -8,33 +8,7 @@
 </head>
 
 <body>
-    <script>
-        //debouncing and throttling 
-        let timeout;
-        function debouncing() {
-            clearTimeout(timeout);
-            timeout = setTimeout(function () {
-                main()
-            }, 1000);
-        }
-
-        async function main() {
-            const a = document.getElementById("num1").value;
-            const b = document.getElementById("num2").value;
-            const c = document.getElementById("num3").value;
-
-            let response = await fetch(`https:/.com/interest?principal=${a}&rate=${b}&time=${c}`)
-            response = await response.json()
-            console.log(response);
-
-            document.getElementById("Total").innerHTML = ("Total: " + response.total)
-            document.getElementById("Interest").innerHTML = ("Interest: " + response.interest)
-
-
-
-        }
-
-    </script>
+   
       
 <!-- <input id ="num1" type="text" placeholder = "Principal"></input><br><br>
 <input id = "num2" type="text" placeholder = "Rate"></input><br><br>
@@ -58,6 +32,7 @@
     <div id="Total"></div>
 
 
+    
 </body>
 
 </html>

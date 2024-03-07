@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div>
+        <input id="title" type="text" placeholder="Title"><br><br>
+        <input id="description" type="text" placeholder="Description"><br><br>
+        <button onclick="addTodo()">Add Todo</button>
+        <div id="Container"></div>
+
+    </div>
+
+    <script>
+        let globalid = 1;
+        function addTodo() {
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const grandParent = document.getElementById("Container");
+            // const originalHtml = document.getElementById("Container").innerHTML;
+            // document.getElementById("Container").innerHTML = originalHtml +`
+            // <div>${title}</div>
+            // <div>${description}</div>
+            // <button>Mark as Done</button>
+            // `
+
+            // document.getElementById("Container").appendChild(parent);
+            grandParent.appendChild(createChild(title, description, globalid++));
+        }
+
+
+        function createChild(title, description, id) {
+            const parent = document.createElement("div");
+            const firstGrandChild = document.createElement("div");
+            firstGrandChild.innerHTML = title;
+            const secondGrandChild = document.createElement("div");
+            secondGrandChild.innerHTML = description;
+            const button = document.createElement("button");
+            button.innerHTML = "Mark as done";
+            button.setAttribute("onclick", `markasDone(${id})`)
+
+            parent.appendChild(firstGrandChild);
+            parent.appendChild(secondGrandChild);
+            parent.appendChild(button);
+            parent.setAttribute("id", id);
+            return parent;
+
+        }
+
+
+        function markasDone(todoId) {
+            const parent = document.getElementById(todoId);
+            parent.children[2].innerHTML = "Done!"
+        }
+
+        function updateDomAccToState(state) {
+            
+            const parent = document.getElementById("Container");
+            parent.innerHTML = "";
+            
+            
+           
+            for (let i = 0; i < state.length; i++) {
+                
+                const child = createChild(state[i].title, state[i].description, state[i].id);
+                parent.appendChild(child);
+            }
+        }
+
+        // updateDomAccToState([{
+        //     title: "hello",
+        //     description: "go there",
+        //     id: "1",
+        // },
+        // {
+        //     title: "hello",
+        //     description: "go there",
+        //     id: "2",
+        // }
+
+        // ])
+
+        
+        window.setInterval(async function () {
+            const res = await fetch("https://sum-server.100xdevs.com/todos");
+            
+            
+            const json = await res.json();
+            
+            
+            updateDomAccToState(json.todos)
+        }, 1000)
+
+
+
+
+    </script>
+
+</body>
+
+</html>
