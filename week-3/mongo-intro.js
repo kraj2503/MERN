@@ -10,7 +10,7 @@ app.use(express.json());
 mongoose.connect("mongo")
  
 const Users = mongoose.model('Users', { name: String, email: String, password: String });
-app.post('/signUp', async     (req, res) => {
+app.post('/signUp', async (req, res) => {
     const name = req.body.Username;
     const email = req.body.email;
     const password = req.body.password;
