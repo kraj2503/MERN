@@ -50,25 +50,56 @@
 
 // Wrapper 
 
+// function App() {
+
+//   return <div>
+
+//     <CardWrapper innerComponent={<TextComponent/>} />
+//   </div>
+
+//   function TextComponent() {
+//     return <>
+//       hi There</>
+//   }
+
+//   function CardWrapper({innerComponent}) {
+
+//     return <div style={{ border: "2px solid Black" }}>
+//       {innerComponent}
+
+//     </div>
+//   }
+
+// }
+
+
 function App() {
+  return (
+  <div>
+    <CardWrapper>
+      <div>
+        Heyy
+      </div>
+    </CardWrapper>
+    <CardWrapper>
+      <div>
+        Heyy
+      </div>
+    </CardWrapper>
+    <CardWrapper>
+      <div>
+        hello 
+      </div>
+    </CardWrapper>
 
-  return <div>
-
-    <CardWrapper innerComponent={<TextComponent/>} />
   </div>
-
-  function TextComponent() {
-    return <>
-      hi There</>
-  }
-
-  function CardWrapper({innerComponent}) {
-
-    return <div style={{ border: "2px solid Black" }}>
-      {innerComponent}
-
-    </div>
-  }
-
+  )
 }
+function CardWrapper({ children }) {
+  return <div style={{ border: "2px black solid", padding: 20 }}  >
+    {children}
+  </div>
+}
+
+
 export default App
