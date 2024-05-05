@@ -13,7 +13,7 @@ function App() {
           setTodos(json.todos);
         });
     }, 1000);
-    
+
 
     return () => {
       console.log(intervalId);
@@ -22,25 +22,25 @@ function App() {
   }, []);
 
 
-    return (
-      <>
+  return (
+    <>
 
 
-        {todos.map(todo => <Todo key={todo.id} title={todo.title} description={todo.description} />)}
+      {todos.map(todo => <Todo key={todo.id} title={todo.title} description={todo.description} />)}
 
-      </>
-    )
-  }
+    </>
+  )
+}
 
 function Todo({ title, description }) {
-      return (
-        <>
-          <h2>{title}</h2>
-          <h4>{description}</h4>
+  return (
+    <>
+      <h2>{title}</h2>
+      <h4>{description}</h4>
 
-        </>
-      )
-    }
+    </>
+  )
+}
 
 
 

@@ -1,42 +1,63 @@
-import { useState, useEffect, useMemo,memo, useCallback } from 'react'
+import { useState, useEffect, useMemo,memo, useCallback ,useRef} from 'react'
 import axios from 'axios'
 
 
 function App() {
 
-  const [count,setCount] = useState(0);
-  
- const inputFunction = useCallback(()=>{
-    console.log("hi there");
+  const divRef = useRef();
+  useEffect(()=>{
+    setTimeout(()=>{
+      divRef.current.innerHTML = 18
+    },5000)
   },[])
+
+
+  const incomeTax = 20000;
+
+  return (
+    <div>
+      income tax returns are <div ref = {divRef}>{incomeTax}</div>
+    </div>
+  )
+    
+}
+
+export default App
+// function App() {
+
+//   const [count,setCount] = useState(0);
+  
+//  const inputFunction = useCallback(()=>{
+//     console.log("hi there");
+//   },[])
 
     
 
 
-  return (
-    <div>
-    <ButtonComponent inputFunction={inputFunction}/>
+//   return (
+//     <div>
+//     <ButtonComponent inputFunction={inputFunction}/>
 
-      <button onClick={()=>{
-        setCount(count+1);
+//       <button onClick={()=>{
+//         setCount(count+1);
 
-      }}>Click me</button>
+//       }}>Click me</button>
 
       
-    </div>
-  )
+//     </div>
+//   )
 
-}
+// }
 
-const ButtonComponent = memo(({inputFunction})=>{
-  console.log("child render")
+// const ButtonComponent = memo(({inputFunction})=>{
+//   console.log("child render")
 
-  return <div> 
-    <button>Button clicked</button>
-    </div>
+//   return <div> 
+//     <button>Button clicked</button>
+//     </div>
 
-})
-export default App
+// })
+// export default App
 // function App() {
 
 // const [counter, setCounter] = useState(0);
