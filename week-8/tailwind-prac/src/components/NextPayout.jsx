@@ -6,9 +6,9 @@ export const NextPayout = ({
 }) => {
     return(
     <div  >
-        <div className="w-96 text-white-500 overflow-hidden">
+        <div className="w-96 text-white-500 shadow-lg overflow-hidden">
 
-        <div className="bg-sky-700 rounded-t-lg shadow-lg p-5 w-96 h-30">
+        <div className="bg-sky-700 rounded-t-lg  p-5 w-96 h-30">
             <div className="text-white flex font-semibold">
                 <div className="pr-2">{title} </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 ">
