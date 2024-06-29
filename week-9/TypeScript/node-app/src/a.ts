@@ -77,37 +77,62 @@
 // e.greet("hii")
 
 
-//Types
-type User = {
-  firstName: string;
-  lastName: string;
-  age: number;
-};
+// //Types
+// type User = {
+//   firstName: string;
+//   lastName: string;
+//   age: number;
+// };
 
-type StringOrNumber = string | number;
+// type StringOrNumber = string | number;
 
-function printId(id: StringOrNumber) {
-  console.log(`ID: ${id}`);
-}
+// function printId(id: StringOrNumber) {
+//   console.log(`ID: ${id}`);
+// }
 
-printId(101);     // ID: 101
-printId("202");   // ID: 202
+// printId(101);     // ID: 101
+// printId("202");   // ID: 202
 
-//intersection
-type Employee = {
-  name: string;
-  startDate: Date;
-};
+// //intersection
+// type Employee = {
+//   name: string;
+//   startDate: Date;
+// };
 
-type Manager = {
-  name: string;
-  department: string;
-};
+// type Manager = {
+//   name: string;
+//   department: string;
+// };
 
-type TeamLead = Employee & Manager;
+// type TeamLead = Employee & Manager;
 
-const teamLead: TeamLead = {
-  name: "harkirat",
-  startDate: new Date(),
-  department: "Software Developer"
-};
+// const teamLead: TeamLead = {
+//   name: "harkirat",
+//   startDate: new Date(),
+//   department: "Software Developer"
+// };
+
+// arrays
+
+// // Enums
+// enum Direction {
+//   Up=5,
+//   Down,
+//   Left,
+//   Right
+// }
+// // enum Direction {
+// //   Up,
+// //   Down,
+// //   Left,
+// //   Right
+// // }
+
+// function doSomething(keyPressed: Direction) {
+// // do something.
+// console.log(keyPressed);
+// }
+// console.log(Direction.Down);
+
+// doSomething(Direction.Up)
+
