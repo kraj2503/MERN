@@ -1,8 +1,7 @@
 import { Client } from "pg";
 
 const client = new Client({
-  connectionString:
-    "postgresql://kshitizraj253:VdgZqt5YI8hN@ep-cool-haze-a1qmxe9n.ap-southeast-1.aws.neon.tech/test?sslmode=require",
+  connectionString: "",
 });
 
 // async function createUsersTable() {
@@ -41,9 +40,6 @@ const client = new Client({
 
 //   deleteUsersTable()
 
-
-
-
 // // Async function to fetch user data from the database given an email
 // async function getUser(email: string) {
 
@@ -52,7 +48,7 @@ const client = new Client({
 //     const query = 'SELECT * FROM users WHERE email = $1';
 //     const values = [email];
 //     const result = await client.query(query, values);
-    
+
 //     if (result.rows.length > 0) {
 //       console.log('User found:', result.rows[0]); // Output user data
 //       return result.rows[0]; // Return the user data
@@ -70,7 +66,6 @@ const client = new Client({
 
 // // Example usage
 // getUser('username45@gmail.com').catch(console.error);
-
 
 // Async function to fetch user data and their address together
 // async function getUserDetailsWithAddress(userId: string) {
