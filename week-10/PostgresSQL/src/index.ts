@@ -2,34 +2,63 @@ import { Client } from "pg";
 
 const client = new Client({
   connectionString:
-""
+    "postgresql://postgres:mysecretpassword@localhost:5432/postgres",
 });
 
+// async function test() {
+//   await client.connect()
+//   const res = await client.query(` SELECT NOW()`)
+// console.log(res);
+// }
+// test()
+
+// //foreign key
+// // async function foreign() {
+//   const query = `CREATE TABLE address (
+//     id serial PRIMARY KEY,
+//     user_id INTEGER  NOT NULL,
+//     city VARCHAR(100) NOT NULL,
+//     street VARCHAR(100) NOT NULL,
+//     pincode VARCHAR(100) NOT NULL,
+//     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+//     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+//    );`;
+//   // await client.connect();
+//   const result = await client.query(query);
+//   console.log(result);
+//   // await client.end();
+// }
 // async function createUsersTable() {
-//   await client.connect();
+//   // await client.connect();
 //   const result = await client.query(`
 //     CREATE TABLE users (
-//         id SERIAL PRIMARY KEY,
-//         username VARCHAR(50) UNIQUE NOT NULL,
-//         email VARCHAR(255) UNIQUE NOT NULL,
-//         password VARCHAR(255) NOT NULL,
-//         created_at TIMESTAMP WITH (id)FAULT CURRENT_TIMESTAMP
-//         );
-//         `);
+//       id SERIAL PRIMARY KEY,
+//       username VARCHAR(50) UNIQUE NOT NULL,
+//       email VARCHAR(255) UNIQUE NOT NULL,
+//       password VARCHAR(255) NOT NULL,
+//       created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+//       );
+//       `);
 //   console.log(result);
+//   // await client.end();
 // }
-// createUsersTable();
-
-// async function insertData() {
+// async function run() {
 //   await client.connect();
-//   const query =
-//     "INSERT INTO users (username , email, password) VALUES ('username5' ,'username45@gmail.com' , '12345678')";
-
-//     const res = await client.query(query);
-//     console.log("Insertion done",res);
+//   await createUsersTable();
+//   await foreign();
 // }
+// run();
 
-// insertData();
+async function insertData() {
+  await client.connect();
+  const query =
+    "INSERT INTO users (username , email, password) VALUES ('username15asd' ,'usernamasde5@gmail.com' , '12345678')";
+
+    const res = await client.query(query);
+    console.log("Insertion done",res);
+}
+
+insertData(); 
 // async function deleteUsersTable() {
 //     try {
 //       const result = await client.query(`DROP TABLE IF EXISTS users;`);
@@ -41,9 +70,6 @@ const client = new Client({
 
 //   deleteUsersTable()
 
-
-
-
 // // Async function to fetch user data from the database given an email
 // async function getUser(email: string) {
 
@@ -52,7 +78,7 @@ const client = new Client({
 //     const query = 'SELECT * FROM users WHERE email = $1';
 //     const values = [email];
 //     const result = await client.query(query, values);
-    
+
 //     if (result.rows.length > 0) {
 //       console.log('User found:', result.rows[0]); // Output user data
 //       return result.rows[0]; // Return the user data
@@ -70,7 +96,6 @@ const client = new Client({
 
 // // Example usage
 // getUser('username45@gmail.com').catch(console.error);
-
 
 // Async function to fetch user data and their address together
 // async function getUserDetailsWithAddress(userId: string) {
