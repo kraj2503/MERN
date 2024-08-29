@@ -1,10 +1,5 @@
-import express from "express";
+import { Value } from "@repo/common/config";
 
-const app = express();
+console.log(Value);
 
-app.get('/',(req,res)=>{
-    console.log("express-app");
-    return true
-})
 
-app.listen(3002)
