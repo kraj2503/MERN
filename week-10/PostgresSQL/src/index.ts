@@ -58,13 +58,14 @@ async function insertData() {
     console.log("Insertion done",res);
 }
 
-insertData(); 
+insertData() 
 // async function deleteUsersTable() {
 //     try {
 //       const result = await client.query(`DROP TABLE IF EXISTS users;`);
 //       console.log("Table deleted:", result);
 //     } catch (err) {
 //       console.error("Error deleting table:", err);
+
 //     }
 //   }
 
