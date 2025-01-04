@@ -1,1 +1,0 @@
-Hello    From     file   a.txt    
