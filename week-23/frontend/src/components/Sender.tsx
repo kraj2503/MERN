@@ -12,14 +12,14 @@ export const Sender = () => {
     setSocket(socket);
   }, []);
 
-  const startSendingVideo = async() => {
+  const startSendingVideo = async () => {
     //create an offer
     if (!socket) {
       return;
     }
     const pc = new RTCPeerConnection();
     pc.onnegotiationneeded = async () => {
-      console.log("Asdasd")
+      console.log("Asdasd");
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
       socket?.send(
@@ -45,8 +45,15 @@ export const Sender = () => {
       }
     };
 
-    const stream = await navigator.mediaDevices.getUserMedia({video:true,audio:false})
-    pc.addTrack(stream.getVideoTracks()[0])
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false,
+    });
+    stream.getTracks().forEach((track) => {
+      pc.addTrack(track, stream)
+    console.log("on Track is triggered")
+    }
+    );
     // console.log(stream.getVideoTracks())
   };
 
