@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Sender } from "./components/Sender";
 import { Receiver } from "./components/Receiver";
@@ -6,9 +6,12 @@ import { Receiver } from "./components/Receiver";
 function App() {
   return (
     <>
+      
       <BrowserRouter>
-        <Route path="/sender" element={<Sender />} />
-        <Route path="/receiver" element={<Receiver />} />
+        <Routes>
+          <Route path="/sender" element={<Sender />} />
+          <Route path="/receiver" element={<Receiver />} />
+        </Routes>
       </BrowserRouter>
     </>
   );
