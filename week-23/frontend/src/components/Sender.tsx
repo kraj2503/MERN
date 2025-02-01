@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Sender = () => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
-
+  const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:8080");
     socket.onopen = () => {
@@ -52,6 +52,11 @@ export const Sender = () => {
     stream.getTracks().forEach((track) => {
       pc.addTrack(track, stream)
     console.log("on Track is triggered on sender")
+    if(videoRef.current){
+      videoRef.current.srcObject= stream
+      videoRef.current.play();
+
+    }
     }
     );
     // console.log(stream.getVideoTracks())
@@ -60,7 +65,7 @@ export const Sender = () => {
   return (
     <div>
       <button onClick={startSendingVideo}>Click me to sender</button>
-      <video src="videoRef"></video>
+      <video ref={videoRef}  playsInline autoPlay></video>
     </div>
   );
 };

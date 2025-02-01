@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 export const Receiver = () => {
   const [pc, setPc] = useState<RTCPeerConnection | null>(null);
+  const [mute,setMute] = useState(true)
+
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:8080");
@@ -14,8 +16,10 @@ export const Receiver = () => {
     pc.ontrack = (event) => {
       console.log("TRIGGERED ON-TRACK", event);
       if (videoRef.current && event.streams[0]) {
-        // Just set the srcObject, don't automatically play
         videoRef.current.srcObject = event.streams[0];
+        videoRef.current
+          .play()
+          .catch((err) => console.error("Error playing video:", err));
       }
     };
     pc.onicecandidate = (event) => {
@@ -55,23 +59,35 @@ export const Receiver = () => {
 
   return (
     <>
-    Receiver
-    <div id="video">
-      <button onClick={() => {
-        if (videoRef.current && videoRef.current.srcObject) {
-          videoRef.current.play();
-          // Ensure audio is not muted after user interaction
-          videoRef.current.muted = false;
+      Receiver
+      <div id="video">
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          muted
+          style={{ width: "100%", maxWidth: "640px" }}
+        />
+        {mute?
+          <button
+          onClick={() => {
+            if (videoRef.current) videoRef.current.muted = false;
+            setMute(false)
+          }}
+          >
+          Unmute
+        </button>
+        :
+        <button
+          onClick={() => {
+            if (videoRef.current) videoRef.current.muted = true;
+            setMute(true)
+          }}
+          >
+          Mute
+        </button>
         }
-      }}>
-        Start 
-      </button>
-      <video 
-        ref={videoRef} 
-        playsInline
-        style={{ width: '100%', maxWidth: '640px' }}
-      />
-    </div>
-  </>
+      </div>
+    </>
   );
 };
