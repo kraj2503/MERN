@@ -11,7 +11,6 @@ wss.on("connection", function connection(ws) {
   // console.log(ws)
   ws.on("message", function message(data: any) {
     const message = JSON.parse(data);
-    console.log("message\n", message);
     if (message.type === "sender") {
       console.log("got Sender", message);
       senderSocket = ws;

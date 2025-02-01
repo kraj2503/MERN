@@ -19,7 +19,7 @@ export const Sender = () => {
     }
     const pc = new RTCPeerConnection();
     pc.onnegotiationneeded = async () => {
-      console.log("Asdasd");
+      console.log("Negotiation needed");
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
       socket?.send(
@@ -51,7 +51,7 @@ export const Sender = () => {
     });
     stream.getTracks().forEach((track) => {
       pc.addTrack(track, stream)
-    console.log("on Track is triggered")
+    console.log("on Track is triggered on sender")
     }
     );
     // console.log(stream.getVideoTracks())
@@ -60,6 +60,7 @@ export const Sender = () => {
   return (
     <div>
       <button onClick={startSendingVideo}>Click me to sender</button>
+      <video src="videoRef"></video>
     </div>
   );
 };
