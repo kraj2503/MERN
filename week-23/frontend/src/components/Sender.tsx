@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
 export const Sender = () => {
+  const [pc, setPc] = useState<RTCPeerConnection | null>(null);
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [audio, setAudio] = useState(false);
+
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:8080");
     socket.onopen = () => {
@@ -18,6 +21,7 @@ export const Sender = () => {
       return;
     }
     const pc = new RTCPeerConnection();
+    setPc(pc);
     pc.onnegotiationneeded = async () => {
       console.log("Negotiation needed");
       const offer = await pc.createOffer();
@@ -45,27 +49,37 @@ export const Sender = () => {
       }
     };
 
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: false,
-    });
-    stream.getTracks().forEach((track) => {
-      pc.addTrack(track, stream)
-    console.log("on Track is triggered on sender")
-    if(videoRef.current){
-      videoRef.current.srcObject= stream
-      videoRef.current.play();
-
-    }
-    }
-    );
-    // console.log(stream.getVideoTracks())
+    video();
   };
 
+  const video = async () => {
+    console.log("inside video");
+    console.log("Audio", audio);
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: audio,
+    });
+    stream.getTracks().forEach((track) => {
+      pc?.addTrack(track, stream);
+      console.log("on Track is triggered on sender");
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
+      }
+    });
+    // console.log(stream.getVideoTracks())
+  };
+  useEffect(() => {
+    video();
+  }, [audio]);
   return (
     <div>
+      <video ref={videoRef} playsInline autoPlay></video>
       <button onClick={startSendingVideo}>Click me to sender</button>
-      <video ref={videoRef}  playsInline autoPlay></video>
+
+      <button onClick={() => setAudio((prev) => !prev)}>
+        {audio ? "Mute" : "Unmute"}
+      </button>
     </div>
   );
 };
