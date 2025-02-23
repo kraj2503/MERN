@@ -77,16 +77,7 @@ spec:
 # ========================
 #  Middleware to Strip /nginx & /apache
 # ========================
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: strip-prefix
-  namespace: default
-spec:
-  stripPrefix:
-    prefixes:
-      - /nginx
-      - /apache
+
 
 # ========================
 #  Traefik Ingress
@@ -98,6 +89,7 @@ metadata:
   namespace: default
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: default-strip-prefix@kubernetescrd
+
 spec:
   ingressClassName: traefik
   rules:
