@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecom-backend-config
+data:
+  database_url: "mongodb://ecom-db:3306/shop"
+  cache_size: "500"
+  payment_gateway_url: "payments.kshitizraj.com"
+  max_cart_items: "50"
+  session_timeout: "300"
